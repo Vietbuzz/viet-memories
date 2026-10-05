@@ -1,7 +1,7 @@
 # KÝ ỨC VIỆT — TÀI LIỆU THIẾT KẾ CHỨC NĂNG
 ## Phần 1: Danh mục chức năng Web & App
 
-> Phiên bản 0.1 — Bản cơ sở để thống nhất
+> Phiên bản 0.2 — Đã nhập ý kiến cộng tác viên (05/10/2026)
 > Quy ước mức ưu tiên: **P0** = bắt buộc có trong MVP · **P1** = giai đoạn 2 · **P2** = giai đoạn sau
 > Quy ước nền tảng: **W** = web desktop · **M** = web/PWA trên điện thoại · **N** = app native (GĐ2)
 
@@ -17,10 +17,10 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 │      Trang giới thiệu · Trang tưởng niệm · Trang dòng họ      │
 ├──────────────────────────────────────────────────────────────┤
 │ KV2 · KHÔNG GIAN GIA ĐÌNH     Đăng nhập · Mobile + Desktop    │
-│      Hồ sơ của tôi · Kho tư liệu · Cây gia phả · Lời mời      │
+│      Hồ sơ của tôi · Kho tư liệu · Mua gói · Lời mời          │
 ├──────────────────────────────────────────────────────────────┤
 │ KV3 · XƯỞNG BIÊN TẬP          Đăng nhập · Desktop-first       │
-│      Wizard tạo hồ sơ · Duyệt đóng góp · Xem trước · Phát hành│
+│      Tạo nhanh · Chỉnh sửa nâng cao · Duyệt · Kích hoạt       │
 ├──────────────────────────────────────────────────────────────┤
 │ KV4 · QUẢN TRỊ VẬN HÀNH       Nội bộ · Desktop                │
 │      Đơn hàng · QR · Đối tác · Đối soát · Nhật ký · Sao lưu   │
@@ -39,10 +39,21 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 |---|---|---|---|---|
 | A1.1 | Giới thiệu giá trị & cách hoạt động | P0 | W M | "Một đời người không nên chỉ còn lại hai dòng chữ trên bia mộ" |
 | A1.2 | Xem hồ sơ mẫu hoàn chỉnh | P0 | W M | Ít nhất 1 hồ sơ demo đầy đủ — công cụ bán hàng chính |
-| A1.3 | Bảng gói dịch vụ & phạm vi | P0 | W M | Ghi rõ: số hồ sơ/ảnh, dung lượng, số lần sửa, thời gian giao, thời hạn lưu, hỗ trợ, quyền xuất dữ liệu |
+| A1.3 | Bảng gói dịch vụ & phạm vi | P0 | W M | Tính phí theo từng hồ sơ người đã khuất. Một tài khoản quản lý nhiều hồ sơ. Chi tiết bảng giá ngay dưới |
 | A1.4 | Form gửi yêu cầu tư vấn | P0 | W M | Tên, SĐT/Zalo, nhu cầu, nguồn biết đến → vào CRM |
-| A1.5 | Trang dành cho đối tác | P1 | W | Chính sách, hoa hồng, cách giới thiệu |
+| A1.5 | Trang dành cho đối tác | P1 | W | Cách giới thiệu. Đối tác bia mộ: công ty thu phí nền tảng và cấp QR; đối tác tự báo giá, thu tiền khắc đá. Hoa hồng chỉ khi có thỏa thuận riêng |
 | A1.6 | Blog / câu chuyện khách hàng | P2 | W M | SEO & tăng niềm tin |
+
+**A1.3 — Gói dịch vụ (đã chốt hướng, một số con số còn mở):**
+
+| Thành phần | Nội dung |
+|---|---|
+| **Basic — dưới 100.000đ/hồ sơ** | Một hồ sơ người đã khuất; tối đa **5 ảnh** và tiểu sử; trình bày theo mẫu; đường dẫn chia sẻ và mã QR số; thanh toán một lần; lưu trữ trọn đời theo phạm vi gói |
+| **Nâng cấp dung lượng** | Mở rộng số ảnh, dung lượng tư liệu, âm thanh và video theo từng gói. Giá và giới hạn cụ thể chốt sau |
+| **Dịch vụ làm video** | Tính phí riêng theo phạm vi biên tập, thời lượng và số lần chỉnh sửa. Công bố dung lượng lưu video đi kèm. Mua thêm không tạo hồ sơ mới |
+| **Bảng QR vật lý** | Tùy chọn, không bắt buộc. Mica, kim loại hoặc gốm. Giá bảng và phí vận chuyển hiện riêng |
+
+Năm ảnh Basic tính cả ảnh chân dung và ảnh bìa nếu là hai tệp khác nhau. Cần chốt thêm dung lượng tối đa mỗi ảnh và giới hạn tiểu sử. "5 ảnh" không có nghĩa là dung lượng không giới hạn.
 
 ### A2. Trang tưởng niệm công khai *(sản phẩm lõi)*
 | Mã | Chức năng | Ưu tiên | Nền tảng | Mô tả |
@@ -69,7 +80,7 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | Mã | Chức năng | Ưu tiên | Nền tảng | Mô tả |
 |---|---|---|---|---|
 | A3.1 | Giới thiệu dòng họ, nhà thờ họ | P1 | W M | Lịch sử, tổ tiên, địa chỉ |
-| A3.2 | Cây gia phả rút gọn (công khai) | P1 | W M | Chỉ tên + năm, không chi tiết |
+| A3.2 | Cây gia phả rút gọn (công khai) | P1 | W M | Chỉ tên + năm của người đã khuất mà gia đình chọn công khai. Dữ liệu người còn sống không mặc định công khai |
 | A3.3 | Khu mộ tổ | P1 | W M | Vị trí, ảnh |
 | A3.4 | Lịch giỗ chạp chung | P2 | W M | Theo lịch âm |
 
@@ -90,11 +101,11 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 ### B2. Bảng điều khiển gia đình
 | Mã | Chức năng | Ưu tiên | Nền tảng | Mô tả |
 |---|---|---|---|---|
-| B2.1 | Danh sách hồ sơ người thân | P0 | W M | Kèm trạng thái: Nháp / Chờ duyệt / Đã xuất bản |
-| B2.2 | Việc cần làm | P0 | W M | Hồ sơ chưa hoàn tất, đóng góp chờ duyệt, lời mời chưa trả lời |
+| B2.1 | Danh sách hồ sơ người thân | P0 | W M | Trạng thái nội dung: Nháp / Chờ duyệt / Đã kích hoạt / Tạm ẩn. Tách khỏi thanh toán, quyền hiển thị và đơn sản xuất |
+| B2.2 | Việc cần làm | P0 | W M | Hồ sơ chưa hoàn tất, bản nháp sắp hết hạn, đóng góp chờ duyệt, lời mời chưa trả lời |
 | B2.3 | Hoạt động gần đây | P1 | W M | Ai vừa gửi gì, ai vừa sửa gì |
 | B2.4 | Nhắc ngày giỗ (âm lịch) | P1 | W M N | Nhắc trước 7 ngày / 1 ngày |
-| B2.5 | Dung lượng & thời hạn dịch vụ | P0 | W M | Hiển thị rõ đã dùng bao nhiêu, hết hạn khi nào |
+| B2.5 | Gói hồ sơ & dung lượng | P0 | W M | Gói đã mua, trạng thái thanh toán, số ảnh và dung lượng đã dùng, quyền lợi. Không hiện ngày hết hạn cho hồ sơ đã mua |
 
 ### B3. Kho tư liệu
 | Mã | Chức năng | Ưu tiên | Nền tảng | Mô tả |
@@ -115,13 +126,16 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | B4.1 | Mời người thân qua link / SĐT / Zalo | P0 | W M | Kèm vai trò được cấp |
 | B4.2 | Quản lý danh sách thành viên & quyền | P0 | W | Thêm, đổi vai trò, thu hồi |
 | B4.3 | Duyệt yêu cầu "Tôi là người thân" | P1 | W M | Từ nút A2.10 |
-| B4.4 | Chuyển giao quyền quản lý hồ sơ | P1 | W | Có quy trình xác minh |
+| B4.4 | Người quản lý dự phòng & tiếp quản | P0 | W | Mỗi hồ sơ khai người dự phòng. Tiếp quản có xác minh; MVP xử lý thủ công được |
 
 ### B5. Cây gia phả
+
+Thêm người vào cây **không tự phát sinh phí**. Thành viên gia phả tối giản (tên, năm, quan hệ) khác với hồ sơ tưởng niệm trả phí. Nâng một thành viên tối giản thành hồ sơ tưởng niệm là một bước mua gói riêng (B6).
+
 | Mã | Chức năng | Ưu tiên | Nền tảng | Mô tả |
 |---|---|---|---|---|
 | B5.1 | Xem cây gia phả (dọc, theo thế hệ) | P1 | W M | Thu/phóng, di chuyển |
-| B5.2 | Thêm người thân vào cây | P1 | W M | Cha, mẹ, vợ/chồng, con |
+| B5.2 | Thêm người thân vào cây | P1 | W M | Cha, mẹ, vợ/chồng, con. Không tạo đơn hàng |
 | B5.3 | Khai báo & xác nhận quan hệ | P1 | W M | Trạng thái: đề xuất / đã xác nhận / mâu thuẫn |
 | B5.4 | Cảnh báo trùng lặp hồ sơ | P1 | (hệ thống) | Gợi ý gộp — **không tự gộp** |
 | B5.5 | Tìm kiếm trong dòng họ | P1 | W M | Theo tên, đời, nhánh |
@@ -129,19 +143,46 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | B5.7 | Nhập gia phả từ file (ảnh chụp / Excel) | P2 | W | Dịch vụ số hóa |
 | B5.8 | Xuất gia phả (PDF / GEDCOM / Excel) | P1 | W | Cam kết "xuất dữ liệu được" |
 
+### B6. Mua gói, thanh toán & giao hàng *(P0)*
+
+Bảng QR và dịch vụ video là tùy chọn. Khách có thể bắt đầu với Basic, rồi mua bảng, nâng dung lượng hoặc đặt video trên **đúng hồ sơ đó**.
+
+| Mã | Chức năng | Ưu tiên | Mô tả |
+|---|---|---|---|
+| B6.1 | Chọn gói cho hồ sơ | P0 | Basic hoặc gói dung lượng cao hơn. Không gói sẵn bảng vào mọi hồ sơ |
+| B6.2 | Nâng gói trên hồ sơ hiện có | P0 | Khi đạt giới hạn: thay tư liệu hoặc nâng gói. Giữ nội dung, đường dẫn và QR. Hiện quyền lợi tăng thêm và số tiền phải trả trước khi thanh toán |
+| B6.3 | Tùy chọn bảng QR | P0 | Vật liệu, màu, kích thước, nội dung trên bảng, phụ kiện. Giá bảng và phí vận chuyển tách khỏi phí nền tảng. Có lối QR số phối hợp đối tác bia mộ, không bắt công ty khắc đá |
+| B6.4 | Duyệt mẫu bảng | P0 | Khách xác nhận tên, ngày tháng, bố cục trước khi sản xuất |
+| B6.5 | Thanh toán | P0 | Tạo đơn, xác nhận tiền, trạng thái chờ / lỗi / thành công. Chống tạo đơn hoặc đưa vào sản xuất trùng. Đơn thành công ghi sang D1 |
+| B6.6 | Địa chỉ nhận hàng | P0 | Người nhận, số điện thoại, địa chỉ, phí giao, thời gian dự kiến. Chỉ khi có hàng vật lý |
+| B6.7 | Theo dõi đơn | P0 | Khách xem tiến độ sản xuất và vận chuyển của bảng đã mua |
+| B6.8 | Hỗ trợ sau giao | P0 | Báo giao hỏng, sai nội dung, QR khó quét. Yêu cầu xử lý hoặc làm lại theo chính sách |
+
 ---
 
 ## KV3 · XƯỞNG BIÊN TẬP *(đăng nhập, desktop-first)*
 
-### C1. Wizard tạo/chỉnh sửa hồ sơ — 7 bước
+### C1. Tạo và chỉnh sửa hồ sơ
+
+Hai lối vào. Khách được xem trước sau lối tạo nhanh; không bắt hoàn thành cả bảy nhóm nội dung mới được xem bản mẫu.
+
+| Mã | Chức năng | Ưu tiên | Mô tả |
+|---|---|---|---|
+| C1.9 | Tạo nhanh | P0 | Thông tin cơ bản → tải ảnh và câu chuyện → xem trước |
+| C1.10 | Tự trình bày theo mẫu | P0 | Tự bố trí ảnh, tiểu sử, dấu mốc và album; ẩn các mục trống; hiển thị đẹp trên máy tính và điện thoại |
+| C1.11 | Chỉnh sửa nâng cao | P0 | Bảy nhóm nội dung bên dưới. Dùng khi khách muốn bổ sung, không phải cổng chặn xem trước |
+| C1.12 | Vòng đời bản nháp | P0 | Số ngày lưu, thời điểm bắt đầu tính, nhắc trước hạn, cách xử lý khi hết hạn. **Số ngày chưa chốt** |
+| C1.13 | Giữ nội dung sau thanh toán | P0 | Bản nháp trở thành hồ sơ lưu theo gói; nội dung khách đã nhập được giữ nguyên |
+
+#### Chỉnh sửa nâng cao — 7 nhóm nội dung
 | Bước | Tên | Ưu tiên | Nội dung |
 |---|---|---|---|
 | 1 | **Thông tin cơ bản** | P0 | Ảnh chân dung, họ tên, năm sinh, năm mất, quê quán, nghề nghiệp, lời giới thiệu ngắn, nguồn thông tin |
 | 2 | **Câu chuyện cuộc đời** | P0 | Tiểu sử dạng văn + các dấu mốc theo năm |
 | 3 | **Ảnh & tư liệu** | P0 | Chọn từ kho, sắp xếp album, viết chú thích |
-| 4 | **Người thân** | P0 | Khai báo quan hệ, liên kết sang hồ sơ khác |
+| 4 | **Người thân** | P0 | Khai báo quan hệ hoặc tạo thành viên tối giản. Không tự phát sinh phí |
 | 5 | **Nơi an nghỉ** | P0 | Nghĩa trang, khu–lô–hàng–mộ, tọa độ, ảnh, ngày giỗ âm lịch |
-| 6 | **Quyền hiển thị** | P0 | Đặt mức Công khai / Gia đình / Riêng tư cho từng khối |
+| 6 | **Quyền hiển thị** | P0 | Mặc định Riêng tư. Người quản lý chủ động chọn phần Công khai hoặc Gia đình |
 | 7 | **Kiểm tra & hoàn tất** | P0 | Checklist trước xuất bản + gửi gia đình duyệt |
 
 | Mã | Chức năng hỗ trợ wizard | Ưu tiên | Mô tả |
@@ -150,7 +191,7 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | C1.2 | Quay lại bất kỳ bước nào | P0 | Không ép tuyến tính |
 | C1.3 | Cho phép để trống / đánh dấu "chờ xác nhận" | P0 | Không ép nhập đủ khi chưa rõ |
 | C1.4 | **Xem trước trực tiếp** (panel bên phải) | P0 | Thấy ngay trang tưởng niệm sẽ trông thế nào |
-| C1.5 | Checklist trước xuất bản | P0 | ☐ Xác nhận tên và ngày tháng ☐ Kiểm tra quyền hiển thị ☐ Gia đình duyệt nội dung |
+| C1.5 | Checklist trước khi gửi duyệt | P0 | ☐ Xác nhận tên và ngày tháng ☐ Kiểm tra quyền hiển thị ☐ Chủ hồ sơ duyệt nội dung. Thanh toán là cổng riêng ở C2.4 |
 | C1.6 | Nút **Gửi gia đình duyệt** | P0 | Chuyển trạng thái → Chờ duyệt |
 | C1.7 | AI gợi ý viết tiểu sử từ tư liệu | P1 | **Chỉ đề xuất**, hiển thị rõ "do AI soạn, cần duyệt" |
 | C1.8 | AI gợi ý mốc thời gian từ ảnh | P2 | Từ metadata & chú thích |
@@ -161,10 +202,21 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | C2.1 | Hàng chờ duyệt nội dung | P0 | Đóng góp từ người thân & khách |
 | C2.2 | So sánh phiên bản (trước/sau) | P1 | Thấy rõ thay đổi gì |
 | C2.3 | Duyệt / từ chối / yêu cầu sửa | P0 | Kèm lý do |
-| C2.4 | Xuất bản hồ sơ | P0 | Sinh URL công khai + kích hoạt QR |
-| C2.5 | Gỡ xuất bản / ẩn tạm | P1 | |
+| C2.4 | Kích hoạt hồ sơ | P0 | Chỉ khi đã xác nhận thanh toán, chủ hồ sơ đã duyệt nội dung và đã xác nhận quyền hiển thị. Sinh URL ổn định và QR số. Hồ sơ trả phí có thể giữ riêng tư |
+| C2.5 | Tạm ẩn | P0 | Ẩn khỏi trang công khai. Không mất dữ liệu, không mất quyền lưu trữ đã mua, không đổi URL |
 | C2.6 | Lịch sử thay đổi đầy đủ | P0 | Ai sửa, sửa gì, lúc nào, ai duyệt |
 | C2.7 | Khôi phục phiên bản cũ | P1 | |
+
+### C3. Dịch vụ biên tập ký ức *(P1 — giai đoạn đầu làm thủ công được)*
+
+QR luôn trỏ về hồ sơ trên nền tảng. Bản video lưu trên hồ sơ độc lập với bản đăng YouTube.
+
+| Mã | Chức năng | Ưu tiên | Mô tả |
+|---|---|---|---|
+| C3.1 | Đặt dịch vụ | P1 | Viết tiểu sử, phục hồi ảnh, biên tập video cuộc đời. Gửi tư liệu và yêu cầu; nhận báo giá |
+| C3.2 | Duyệt biên tập | P1 | Duyệt kịch bản, xem bản dựng, yêu cầu sửa, duyệt bản cuối. Theo dõi tiến độ, số vòng sửa và bàn giao |
+| C3.3 | Bàn giao video | P1 | Lưu video vào hồ sơ; khách tải được bản cuối. Công bố dung lượng lưu video đi kèm gói dịch vụ |
+| C3.4 | Quyền sử dụng ngoài hồ sơ | P1 | Xin phép riêng nếu đăng YouTube hoặc dùng để quảng bá. Lưu phạm vi đồng ý, phiên bản được duyệt và yêu cầu gỡ |
 
 ---
 
@@ -175,7 +227,7 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 |---|---|---|---|
 | D1.1 | Danh sách lead (có nguồn) | P0 | A2, A3 |
 | D1.2 | CRM đơn giản: lead → tư vấn → báo giá → chốt | P0 | A3 |
-| D1.3 | Hồ sơ đơn hàng: phạm vi, giá, thời hạn, người quản lý | P0 | A3, A6 |
+| D1.3 | Hồ sơ đơn hàng: phạm vi gói, giá, trạng thái thanh toán, người quản lý | P0 | A3, A6 |
 | D1.4 | Checklist đơn & lịch giao | P0 | A6 |
 | D1.5 | Ticket hỗ trợ khách | P1 | A6 |
 | D1.6 | Mẫu báo giá & email/Zalo giới thiệu | P1 | A3 |
@@ -183,10 +235,10 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 ### D2. QR vật lý
 | Mã | Chức năng | Ưu tiên | Mô tả |
 |---|---|---|---|
-| D2.1 | Sinh mã QR gắn với hồ sơ | P0 | **Link ổn định, không đổi** |
-| D2.2 | Quản lý loại vật liệu (mica / kim loại / khắc đá) | P0 | |
-| D2.3 | Theo dõi trạng thái: đặt → sản xuất → vận chuyển → lắp đặt → nghiệm thu | P0 | |
-| D2.4 | Quét thử & xác nhận QR mở đúng trang | P0 | Bắt buộc trước bàn giao |
+| D2.1 | Sinh mã QR gắn với hồ sơ | P0 | Link ổn định, không đổi khi sửa nội dung, nâng gói hoặc chuyển quản lý. Không tái sử dụng mã hồ sơ đã xóa |
+| D2.2 | Loại bảng QR | P0 | **Mica** (trong nhà). **Kim loại cao cấp** (trong nhà hoặc bia mộ; màu vàng, bạc, đồng, trắng sáng). **Gốm** (chưa mở bán đến khi chốt mẫu, cách chế tác và điều kiện dùng). Không có sản phẩm công ty khắc trực tiếp lên đá |
+| D2.3 | Trạng thái sản xuất bảng | P0 | Chờ duyệt mẫu → Đang sản xuất → Kiểm tra QR → Đóng gói → Vận chuyển → Đã giao. Giao bảng khoan sẵn và phụ kiện phù hợp; khách tự lắp |
+| D2.4 | Kiểm tra QR trước khi giao | P0 | Quét thử, mở đúng trang. Với gốm: thêm kiểm tra khả năng quét, đóng gói chống vỡ và xử lý hư hỏng khi giao. Không áp cách khoan, bắt vít của kim loại cho gốm |
 | D2.5 | Cấp lại QR khi hỏng / mất | P1 | Giữ nguyên link cũ |
 | D2.6 | Thống kê lượt quét theo hồ sơ | P1 | Đầu vào của vòng tăng trưởng |
 
@@ -195,8 +247,8 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 |---|---|---|---|
 | D3.1 | Hồ sơ đối tác & hợp đồng | P1 | Cơ sở bia mộ, đá mỹ nghệ, tang lễ |
 | D3.2 | Mã giới thiệu riêng cho từng đối tác | P1 | Gắn nguồn đơn |
-| D3.3 | Bảng theo dõi đơn & hoa hồng | P1 | |
-| D3.4 | Đối soát & thanh toán hoa hồng | P1 | A7 |
+| D3.3 | Theo dõi đơn đối tác | P1 | Đối tác bia mộ: không mặc định trả thêm hoa hồng. Công ty thu phí nền tảng và cấp QR; đối tác tự báo giá, thu tiền khắc đá |
+| D3.4 | Đối soát hoa hồng khi có thỏa thuận | P1 | A7. Chỉ áp dụng cho thỏa thuận riêng, không áp mặc định cho đối tác bia mộ |
 | D3.5 | Cổng đối tác (tự xem đơn của mình) | P2 | **Không xem được dữ liệu gia đình** |
 
 ### D4. Tài chính & báo cáo
@@ -214,8 +266,8 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 | D5.2 | Sao lưu tự động + **kiểm tra khôi phục định kỳ** | P0 | Không chỉ backup, phải test restore |
 | D5.3 | Xuất dữ liệu theo hồ sơ / theo gia đình | P0 | Cam kết "rời dịch vụ được" |
 | D5.4 | Rà soát quyền định kỳ | P1 | A8 |
-| D5.5 | Quản lý thời hạn & nhắc gia hạn | P0 | |
-| D5.6 | Quy trình xóa dữ liệu theo yêu cầu | P1 | Có xác minh, có thời gian chờ |
+| D5.5 | Quản lý vòng đời bản nháp | P0 | Thời hạn dùng thử, nhắc trước hạn, xử lý bản nháp chưa thanh toán. Không gia hạn định kỳ cho hồ sơ đã mua |
+| D5.6 | Tiếp nhận yêu cầu xóa dữ liệu | P0 | Có xác minh. MVP tiếp nhận và xử lý thủ công; quy trình xóa tự động làm sau |
 
 ---
 
@@ -235,25 +287,29 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 
 ---
 
-## B. ĐỀ XUẤT PHẠM VI MVP (chốt để làm trước)
+## B. PHẠM VI MVP
 
-### ✅ Có trong MVP
-- KV1: A1.1–A1.4, **A2.1–A2.11** (toàn bộ trang tưởng niệm)
-- KV2: B1.1–B1.4, B2.1–B2.2, B2.5, **B3.1–B3.8**, B4.1–B4.2
-- KV3: **Toàn bộ wizard 7 bước C1.1–C1.6**, C2.1, C2.3, C2.4, C2.6
-- KV4: D1.1–D1.4, **D2.1–D2.4**, D4.1, D5.1–D5.3, D5.5
+Liệt kê đúng mã làm trong MVP. Không gom dải nếu trong dải có mục P1 hoặc P2.
 
-### ⏸ Để lại giai đoạn 2
-- Cây gia phả (B5.*)
-- Nhắc giỗ âm lịch (B2.4)
-- AI hỗ trợ biên tập (C1.7–C1.8)
-- Cổng đối tác & hoa hồng (D3.*)
-- Ghi âm lời kể, video ký ức
+### Có trong MVP (P0)
+- **KV1:** A1.1, A1.2, A1.3, A1.4, A2.1, A2.2, A2.3, A2.4, A2.5, A2.6, A2.7, A2.8, A2.9, A2.11
+- **KV2:** B1.1, B1.2, B1.3, B1.4, B2.1, B2.2, B2.5, B3.1, B3.2, B3.4, B3.5, B3.6, B3.7, B3.8, B4.1, B4.2, B4.4, B6.1–B6.8
+- **KV3:** C1.1–C1.6, C1.9–C1.13, C2.1, C2.3, C2.4, C2.5, C2.6
+- **KV4:** D1.1–D1.4, D2.1–D2.4, D4.1, D5.1, D5.2, D5.3, D5.5, D5.6
 
-### ⏹ Giai đoạn sau
-- Toàn bộ KV5 (nghĩa trang B2B)
+Gốm có mặt trong mô hình D2.2 nhưng chưa mở bán cho đến khi kiểm tra sản phẩm thật.
+
+### Giai đoạn 2 (P1)
+- A1.5, A2.10, A2.12, A2.13, A3.1–A3.3
+- B1.5, B1.6, B2.3, B2.4, B3.3, B3.9, B4.3, B5.1–B5.5, B5.8
+- C1.7, C2.2, C2.7, C3.1–C3.4 (dịch vụ biên tập; có thể nhận và xử lý thủ công trước khi có đủ màn hình)
+- D1.5, D1.6, D2.5, D2.6, D3.1–D3.4, D4.2–D4.4, D5.4
+
+### Giai đoạn sau (P2)
+- A1.6, A2.14, A2.15, A3.4, B5.6, B5.7, C1.8, D3.5
+- Toàn bộ KV5 (phần mềm nghĩa trang)
 - App native
-- Sổ tưởng niệm, thắp nến ảo, đa ngôn ngữ
+- Đa ngôn ngữ
 
 ---
 
@@ -263,11 +319,12 @@ Hệ thống chia thành **5 khu vực** với đối tượng và mục đích 
 |---|---|
 | **Hiệu năng** | Trang tưởng niệm mở < 2.5s trên 4G. Ảnh lazy-load, nén nhiều kích cỡ. |
 | **Khả dụng** | QR phải mở được trên mọi trình duyệt điện thoại phổ thông, **không cần cài app, không cần đăng nhập**. |
-| **Độ bền link** | URL từ QR **không bao giờ đổi** — kể cả khi hồ sơ được sửa, chuyển người quản lý hay đổi gói. |
+| **Độ bền link** | URL từ QR không đổi khi hồ sơ được sửa, chuyển người quản lý hoặc nâng gói. Mã hồ sơ đã xóa không gán cho người khác. |
 | **Khả năng tiếp cận** | Cỡ chữ lớn, tương phản cao — người dùng nhiều tuổi. Hỗ trợ phóng to hệ thống. |
-| **Tôn trọng bối cảnh** | **Không quảng cáo chen vào trang tưởng niệm.** Không bán dữ liệu gia đình. Không thu phí mở khóa ký ức đã mua. |
+| **Tôn trọng bối cảnh** | Không quảng cáo trên trang tưởng niệm. Không bán dữ liệu gia đình. Không thu phí mở khóa ký ức đã mua và không buộc gia hạn để xem lại. |
 | **Sao lưu** | Sao lưu hằng ngày, giữ bản gốc tư liệu, kiểm tra khôi phục hàng tháng. |
-| **Riêng tư** | Mặc định Riêng tư. Quét QR không cấp quyền. Nhật ký truy cập đầy đủ. |
+| **Riêng tư** | Mặc định Riêng tư, kể cả dữ liệu người còn sống. Người quản lý chủ động chọn phần công khai. Quét QR không cấp quyền. |
+| **Bảo mật đường dẫn** | Kiểm tra quyền trên máy chủ đối với trang hồ sơ và từng đường dẫn ảnh, video, tài liệu. Ẩn trên giao diện là chưa đủ. |
 | **Xuất dữ liệu** | Gia đình luôn xuất được toàn bộ dữ liệu của mình ở định dạng mở. |
 
 ---

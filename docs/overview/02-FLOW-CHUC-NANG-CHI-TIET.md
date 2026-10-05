@@ -1,8 +1,9 @@
 # KÝ ỨC VIỆT — TÀI LIỆU THIẾT KẾ CHỨC NĂNG
 ## Phần 2: Flow chức năng chi tiết
 
-> Phiên bản 0.1 — Bản cơ sở để thống nhất
+> Phiên bản 0.2 — Đã nhập ý kiến cộng tác viên (05/10/2026)
 > Mỗi flow gồm: **Ai làm · Điều kiện vào · Các bước · Trạng thái dữ liệu · Ngoại lệ · Điểm đo**
+> Trạng thái nội dung, thanh toán, quyền hiển thị và đơn sản xuất được theo dõi riêng.
 
 ---
 
@@ -12,20 +13,20 @@
 - [F1. Quét QR → xem trang tưởng niệm (khách ẩn danh)](#f1)
 - [F2. Khách gửi một kỷ niệm](#f2)
 - [F3. Đăng ký & tạo không gian gia đình](#f3)
-- [F4. Tạo hồ sơ tưởng niệm — wizard 7 bước](#f4)
+- [F4. Tạo hồ sơ tưởng niệm — tạo nhanh và chỉnh sửa nâng cao](#f4)
 - [F5. Mời người thân & cấp quyền](#f5)
 - [F6. Người thân đóng góp tư liệu](#f6)
 - [F7. Duyệt nội dung & xuất bản](#f7)
 - [F8. Mở rộng từ hồ sơ → cây gia phả](#f8)
 - [F9. Chuyển giao người quản lý](#f9)
-- [F10. Gia hạn / xuất dữ liệu / rời dịch vụ](#f10)
+- [F10. Xuất dữ liệu / tạm ẩn / rời dịch vụ](#f10)
 
 **Nhóm 2 — Flow kinh doanh & vận hành**
 - [F11. Hành trình khách hàng 6 bước (end-to-end)](#f11)
 - [F12. Từ lead đến đơn hàng](#f12)
-- [F13. Quy trình sản xuất một đơn (7 bước nội bộ)](#f13)
+- [F13. Quy trình biên tập khi khách thuê dịch vụ](#f13)
 - [F14. Sản xuất & bàn giao QR vật lý](#f14)
-- [F15. Đối tác giới thiệu & đối soát hoa hồng](#f15)
+- [F15. Đối tác bia mộ và hoa hồng theo thỏa thuận](#f15)
 
 **Nhóm 3 — Flow hệ thống**
 - [F16. Xử lý dữ liệu mâu thuẫn / trùng lặp](#f16)
@@ -40,25 +41,25 @@
 ## F1. Quét QR → xem trang tưởng niệm
 
 **Ai:** Khách ẩn danh (người viếng mộ, người được chia sẻ link)
-**Điều kiện vào:** Hồ sơ đã ở trạng thái `Đã xuất bản`
+**Điều kiện vào:** Hồ sơ đã kích hoạt và có ít nhất một phần mức Công khai
 **Nền tảng:** Mobile (99% trường hợp)
 
 ### Các bước
 ```
-1. Quét QR trên bia mộ / bảng mica / bảng kim loại
+1. Quét QR số, bảng mica, bảng kim loại hoặc bảng gốm
         ↓
 2. Trình duyệt mở kyucviet.vn/h/{ma-ho-so}
         ↓
-3. Hiển thị ngay khối đầu trang:
+3. Hiển thị ngay khối đầu trang mà gia đình đã cho công khai:
    ảnh chân dung · tên · năm sinh–năm mất · câu trích dẫn
         ↓
 4. Người xem cuộn/chuyển tab:
    Câu chuyện → Dấu mốc → Album → Người thân → Nơi an nghỉ
         ↓
-5. Ba lối rẽ CTA (luôn hiện):
-   ┌─ [Chia sẻ] ──────→ Zalo / FB / sao chép link
-   ├─ [Gửi một kỷ niệm] → F2
-   └─ [Tôi là người thân] → F5 (yêu cầu kết nối)
+5. Lối rẽ CTA:
+   ┌─ [Chia sẻ] ──────→ Zalo / FB / sao chép link     (P0)
+   ├─ [Gửi một kỷ niệm] → F2                           (P0)
+   └─ [Tôi là người thân] → F5 hướng B                 (P1)
 ```
 
 ### Quy tắc hiển thị
@@ -71,8 +72,9 @@
 ### Ngoại lệ
 | Tình huống | Xử lý |
 |---|---|
-| Hồ sơ chưa xuất bản | Trang "Hồ sơ đang được gia đình hoàn thiện" + nút Liên hệ |
-| Hồ sơ đã gỡ / hết hạn | Trang "Hồ sơ tạm ngừng hiển thị" + hướng dẫn liên hệ người quản lý |
+| Hồ sơ chưa kích hoạt hoặc chưa có phần công khai | Trang "Hồ sơ đang được gia đình hoàn thiện" + nút Liên hệ. Không lộ nội dung Riêng tư |
+| Hồ sơ đã kích hoạt nhưng gia đình giữ riêng tư | Trang ngắn: gia đình chưa mở nội dung công khai. Không xem là hết hạn |
+| Hồ sơ tạm ẩn | Trang "Hồ sơ tạm ngừng hiển thị" + hướng dẫn liên hệ người quản lý. Dữ liệu và quyền lưu trữ đã mua vẫn còn |
 | QR hỏng, không có mã hợp lệ | Trang tra cứu thủ công (nhập tên + năm mất) |
 | Mạng yếu tại nghĩa trang | Ưu tiên tải khối đầu trang trước; ảnh album tải sau; có bản nhẹ |
 
@@ -160,11 +162,40 @@
 ---
 
 <a id="f4"></a>
-## F4. Tạo hồ sơ tưởng niệm — WIZARD 7 BƯỚC ⭐
+## F4. Tạo hồ sơ tưởng niệm — TẠO NHANH VÀ CHỈNH SỬA NÂNG CAO ⭐
 
-**Ai:** Người quản lý gia đình, hoặc A4 (biên tập viên) làm hộ
-**Nền tảng:** Desktop-first, có bản mobile rút gọn
-**Bố cục màn hình:** Danh sách bước (trái) · Form (giữa) · **Xem trước trực tiếp (phải)**
+**Ai:** Người quản lý gia đình. A4 chỉ vào khi khách thuê dịch vụ biên tập (F13, P1)
+**Nền tảng:** Tạo nhanh dùng được trên điện thoại và máy tính. Chỉnh sửa nâng cao ưu tiên máy tính, có bản mobile rút gọn
+
+### Lối A — Tạo nhanh (P0)
+
+```
+1. Nhập thông tin cơ bản: ảnh, họ tên, năm sinh, năm mất, câu chuyện ngắn
+        ↓
+2. Tải thêm ảnh nếu có
+        ↓
+3. Hệ thống tự trình bày theo mẫu:
+   bố trí ảnh, tiểu sử, dấu mốc, album
+   ẩn các mục đang trống
+   xem đẹp trên máy tính và điện thoại
+        ↓
+4. Xem trước ngay — không cần đi hết bảy nhóm nội dung
+        ↓
+5. Bản nháp được lưu. Khách chọn gói và thanh toán ở F11
+```
+
+Sau thanh toán, bản nháp thành hồ sơ lưu theo gói. Nội dung đã nhập được giữ nguyên.
+
+### Vòng đời bản nháp chưa thanh toán
+
+- Ghi số ngày được lưu, thời điểm bắt đầu tính, nhắc trước hạn và việc xảy ra khi hết hạn.
+- **Số ngày chưa chốt** (xem mục 11 của tài liệu 00).
+- Hết hạn chỉ áp dụng cho bản nháp chưa thanh toán. Hồ sơ đã mua không đi vào vòng đời này.
+- Nhắc bỏ dở sau 3 ngày và 7 ngày vẫn là nhắc quay lại, khác với hạn xóa hoặc khóa bản nháp.
+
+### Lối B — Chỉnh sửa nâng cao (P0, không chặn xem trước)
+
+**Bố cục màn hình:** Danh sách nhóm (trái) · Form (giữa) · **Xem trước trực tiếp (phải)**
 
 ```
 ┌───────────┬─────────────────────────┬──────────────────┐
@@ -208,9 +239,11 @@
 
 ### Bước 4 — Người thân
 - Thêm quan hệ: Cha · Mẹ · Vợ/Chồng · Con · Anh chị em
-- Mỗi người: **liên kết hồ sơ đã có** hoặc **tạo hồ sơ tối giản** (chỉ tên + năm)
+- Mỗi người: **liên kết hồ sơ đã có** hoặc **tạo thành viên tối giản** (chỉ tên + năm)
+- Thành viên tối giản không phát sinh phí. Hồ sơ tưởng niệm trả phí là một lần mua riêng
+- Dữ liệu người còn sống không mặc định công khai
 - Hệ thống cảnh báo nếu phát hiện hồ sơ trùng → F16
-- 🔗 Đây là **cầu nối sang gia phả** (F8)
+- Đây là cầu nối sang gia phả (F8, P1)
 
 ### Bước 5 — Nơi an nghỉ
 - Nghĩa trang / địa điểm · Khu – Lô – Hàng – Mộ · Tọa độ (chọn trên bản đồ) · Ảnh khu mộ
@@ -218,19 +251,20 @@
 - Ghi chú đường đi
 
 ### Bước 6 — Quyền hiển thị
-Bảng đặt mức cho từng khối:
+
+Mọi khối **mặc định Riêng tư**. Người quản lý chủ động chọn phần Công khai hoặc Gia đình. Hồ sơ đã trả phí vẫn kích hoạt được khi chưa mở gì ra công khai.
 
 | Khối nội dung | Công khai | Gia đình | Riêng tư |
 |---|:--:|:--:|:--:|
-| Tên, ảnh, năm sinh–mất | ◉ | ○ | ○ |
-| Lời giới thiệu ngắn | ◉ | ○ | ○ |
-| Câu chuyện cuộc đời | ○ | ◉ | ○ |
-| Album ảnh | ○ | ◉ | ○ |
-| Người thân | ◉ | ○ | ○ |
-| Nơi an nghỉ | ○ | ◉ | ○ |
+| Tên, ảnh, năm sinh–mất | ○ | ○ | ◉ |
+| Lời giới thiệu ngắn | ○ | ○ | ◉ |
+| Câu chuyện cuộc đời | ○ | ○ | ◉ |
+| Album ảnh | ○ | ○ | ◉ |
+| Người thân | ○ | ○ | ◉ |
+| Nơi an nghỉ | ○ | ○ | ◉ |
 | Giấy tờ, liên hệ | ○ | ○ | ◉ |
 
-⚠️ Cảnh báo hiển thị cố định: **"Quét QR không tự cấp quyền xem tư liệu riêng."**
+Cảnh báo cố định: **"Quét QR không tự cấp quyền xem tư liệu riêng."** Đường dẫn ảnh, video và tài liệu cũng phải được kiểm tra quyền trên máy chủ.
 
 ### Bước 7 — Kiểm tra & hoàn tất
 Checklist bắt buộc tick đủ:
@@ -240,14 +274,19 @@ Checklist bắt buộc tick đủ:
 
 → Nút **[Gửi gia đình duyệt]**
 
-### Trạng thái dữ liệu
+### Trạng thái nội dung
+
+Thanh toán, quyền hiển thị và đơn sản xuất không nằm trên sơ đồ này.
+
 ```
-Nháp ──[Gửi duyệt]──▶ Chờ gia đình duyệt ──[Duyệt]──▶ Sẵn sàng xuất bản
-  ▲                            │                              │
-  └────[Yêu cầu sửa]───────────┘                    [Xuất bản]│
-                                                               ▼
-                                                        Đã xuất bản
+Nháp ──[Gửi duyệt]──▶ Chờ duyệt nội dung ──[Chủ hồ sơ duyệt]──▶ Nội dung đã duyệt
+  ▲                         │
+  └────[Yêu cầu sửa]────────┘
+
+Nội dung đã duyệt + Đã thanh toán + Đã chọn quyền hiển thị ──▶ Đã kích hoạt (F7)
 ```
+
+Bản nháp chưa thanh toán có thể hết hạn theo quy tắc chưa chốt ở trên. Hồ sơ đã kích hoạt không có trạng thái quá hạn.
 
 ### Ngoại lệ
 | Tình huống | Xử lý |
@@ -258,7 +297,7 @@ Nháp ──[Gửi duyệt]──▶ Chờ gia đình duyệt ──[Duyệt]─
 | Không có ảnh chân dung | Dùng ảnh mặc định trang nhã, vẫn xuất bản được |
 
 ### Điểm đo ⭐
-**Tỷ lệ hoàn tất hồ sơ — mục tiêu ≥ 60%.** Đo điểm bỏ dở theo từng bước (1→7) để biết bước nào gây nghẽn.
+**Tỷ lệ hoàn tất hồ sơ — mục tiêu ≥ 60%.** Đo riêng lối tạo nhanh và điểm bỏ dở từng nhóm của chỉnh sửa nâng cao.
 
 ---
 
@@ -276,7 +315,7 @@ Hướng A — Chủ động mời:
 5. Người được mời mở link → đăng nhập bằng OTP → vào không gian gia đình
 6. Hệ thống ghi log: ai mời, mời ai, vai trò gì, lúc nào
 
-Hướng B — Yêu cầu từ ngoài vào:
+Hướng B — Yêu cầu từ ngoài vào (P1, không nằm trong MVP):
 1. Khách bấm [Tôi là người thân] trên trang công khai
 2. Khai: quan hệ với người này + tên + SĐT
 3. → Hàng chờ "Yêu cầu kết nối" của người quản lý
@@ -339,20 +378,25 @@ Hướng B — Yêu cầu từ ngoài vào:
    ├─ [Yêu cầu sửa]   → Trả về người gửi kèm lý do
    └─ [Từ chối]       → Lưu trữ, không hiển thị, vẫn giữ log
         ↓
-4. Khi hồ sơ đã sẵn sàng → [Xuất bản]
+4. [Kích hoạt hồ sơ] chỉ mở khi đủ cả ba:
+   • Đã xác nhận thanh toán
+   • Chủ hồ sơ đã duyệt nội dung
+   • Đã xác nhận quyền hiển thị
         ↓
 5. Hệ thống:
-   • Sinh URL công khai ổn định: kyucviet.vn/h/{ma}
-   • Kích hoạt mã QR gắn với URL đó
-   • Ghi phiên bản xuất bản + timestamp + người duyệt
-   • Thông báo cho toàn bộ thành viên gia đình
+   • Sinh URL ổn định: kyucviet.vn/h/{ma}
+   • Gắn mã QR số với URL đó — mã này không đổi và không được cấp lại cho người khác nếu hồ sơ bị xóa
+   • Ghi phiên bản, timestamp và người duyệt
+   • Thông báo cho thành viên gia đình
+   • Nếu chưa có khối nào mức Công khai, hồ sơ vẫn kích hoạt nhưng trang quét QR không lộ nội dung
 ```
 
 ### Quy tắc bất biến
 1. **Mọi nội dung AI sinh ra phải qua bước duyệt của người thật** trước khi hiển thị công khai.
-2. **URL công khai không bao giờ đổi** sau lần xuất bản đầu.
+2. **URL không đổi** sau lần kích hoạt đầu, kể cả khi sửa nội dung, nâng gói hoặc chuyển quản lý.
 3. **Lịch sử thay đổi không được xóa** — chỉ thêm.
-4. Gỡ xuất bản chỉ ẩn khỏi công khai, **không xóa dữ liệu**.
+4. Tạm ẩn chỉ giấu khỏi công khai. Không xóa dữ liệu và không mất quyền lưu trữ đã mua.
+5. Hồ sơ trả phí có thể giữ riêng tư. Kích hoạt không buộc công khai.
 
 ### Điểm đo
 Thời gian trung bình từ "gửi duyệt" → "xuất bản". Số vòng sửa / hồ sơ.
@@ -376,8 +420,9 @@ Thời gian trung bình từ "gửi duyệt" → "xuất bản". Số vòng sử
    ├─ [Thêm vợ/chồng] → mở rộng ngang
    └─ [Xem hồ sơ]     → sang trang tưởng niệm
         ↓
-4. Mỗi người mới thêm = một hồ sơ tối giản (tên + năm)
-   → có thể nâng cấp thành hồ sơ đầy đủ bất kỳ lúc nào
+4. Mỗi người mới thêm = một thành viên tối giản (tên + năm)
+   → không tự phát sinh phí
+   → muốn thành hồ sơ tưởng niệm thì mua gói riêng, giữ quan hệ đã khai
         ↓
 5. Quan hệ mới có trạng thái "Đề xuất" cho tới khi
    người quản lý hoặc người thân liên quan XÁC NHẬN
@@ -415,38 +460,43 @@ Hướng B — Người quản lý không còn khả năng:
 5. Chuyển quyền, ghi log đầy đủ
 ```
 
-**Bắt buộc từ MVP:** mỗi hồ sơ phải khai **người quản lý dự phòng**.
+**Bắt buộc từ MVP:** mỗi hồ sơ phải khai **người quản lý dự phòng**. Hướng B được xử lý thủ công, có xác minh, ngay trong MVP.
 
 ---
 
 <a id="f10"></a>
-## F10. Gia hạn / Xuất dữ liệu / Rời dịch vụ
+## F10. Xuất dữ liệu / Tạm ẩn / Rời dịch vụ
+
+Hồ sơ đã mua không có luồng gia hạn và không bị ẩn vì quá hạn. Khách không phải gia hạn để xem lại ký ức.
 
 ```
-GIA HẠN
-1. Hệ thống nhắc trước 60 / 30 / 7 ngày (Zalo + email + banner trong app)
-2. Hiển thị rõ: hết hạn khi nào · phí bao nhiêu · nếu không gia hạn thì sao
-3. Thanh toán → gia hạn ngay
-4. Nếu quá hạn:
-   • Ngày 1–30:  vẫn hiển thị, có banner nhắc
-   • Ngày 31–90: chuyển sang chế độ chỉ đọc, banner rõ ràng
-   • Sau 90 ngày: ẩn khỏi công khai, DỮ LIỆU VẪN GIỮ
-   • Không bao giờ tự xóa dữ liệu vì quá hạn mà chưa báo
+TẠM ẨN  (P0)
+1. Người quản lý chọn [Tạm ẩn]
+2. Trang công khai và QR không còn hiện nội dung
+3. Dữ liệu, đường dẫn và quyền lưu trữ đã mua được giữ
+4. Bỏ ẩn thì trang hiện lại theo quyền hiển thị đang chọn
 
 XUẤT DỮ LIỆU  (quyền của gia đình, luôn có)
 1. Cài đặt → [Xuất dữ liệu]
 2. Chọn phạm vi: một hồ sơ / cả không gian gia đình
-3. Hệ thống đóng gói: ảnh & tư liệu bản gốc + JSON dữ liệu + PDF trang tưởng niệm
+3. Hệ thống đóng gói: ảnh và tư liệu bản gốc + JSON dữ liệu + PDF trang tưởng niệm
 4. Gửi link tải (có hạn 7 ngày) qua email
 
 RỜI DỊCH VỤ
 1. Yêu cầu ngừng → bắt buộc xuất dữ liệu trước
 2. Xác nhận 2 lần, cách nhau 7 ngày
-3. Gỡ công khai + vô hiệu QR
+3. Gỡ hiển thị công khai
 4. Giữ dữ liệu thêm 90 ngày (cho phép khôi phục) rồi mới xóa
+5. Mã hồ sơ và QR của hồ sơ đã xóa không gán cho người khác
+
+YÊU CẦU XÓA  (P0, xử lý thủ công trong MVP)
+1. Người quản lý gửi yêu cầu xóa, ghi rõ phạm vi
+2. A8 xác minh danh tính
+3. Xóa theo phạm vi đã xác nhận, ghi log
+4. Xóa tự động toàn trình làm ở giai đoạn sau
 ```
 
-> ⚠️ **Nguyên tắc truyền thông:** không dùng từ "vĩnh viễn" trong giao diện khi chưa có nguồn lực bảo đảm. Dùng: *"lưu trữ trong thời hạn dịch vụ, có phương án xuất dữ liệu và kế thừa."*
+> Giao diện nói: *"thanh toán một lần, lưu trữ trọn đời theo phạm vi gói đã công bố"*. Không dùng "vĩnh viễn không điều kiện". Vòng đời có hạn chỉ áp dụng cho **bản nháp chưa thanh toán** (F4).
 
 ---
 ---
@@ -454,31 +504,29 @@ RỜI DỊCH VỤ
 # NHÓM 2 — FLOW KINH DOANH & VẬN HÀNH
 
 <a id="f11"></a>
-## F11. Hành trình khách hàng 6 bước (end-to-end) ⭐
+## F11. Hành trình khách tự mua (end-to-end) ⭐
+
+Đây là hành trình P0. Bảng QR vật lý không còn bắt buộc đi kèm mọi hồ sơ.
 
 ```
-┌─1─────────────┐  ┌─2─────────────┐  ┌─3─────────────┐
-│ BIẾT ĐẾN &    │→ │ CHỌN GÓI &    │→ │ GỬI TƯ LIỆU   │
-│ XEM MẪU       │  │ THỐNG NHẤT    │  │               │
-│               │  │               │  │               │
-│ Đối tác giới  │  │ Chốt phạm vi, │  │ Ảnh, lời kể,  │
-│ thiệu hoặc    │  │ giá, thời     │  │ thông tin;    │
-│ nội dung; xem │  │ gian, duy trì │  │ chọn quyền    │
-│ 1 hồ sơ mẫu   │  │ và người      │  │ hiển thị;     │
-│ hoàn chỉnh    │  │ quản lý       │  │ kiểm phần     │
-│               │  │               │  │ còn thiếu     │
-└───────────────┘  └───────────────┘  └───────────────┘
-┌─4─────────────┐  ┌─5─────────────┐  ┌─6─────────────┐
-│ XEM TRƯỚC &   │→ │ NHẬN HỒ SƠ &  │→ │ BỔ SUNG &     │
-│ DUYỆT         │  │ QR            │  │ KẾT NỐI       │
-│               │  │               │  │               │
-│ Gia đình xác  │  │ Kiểm tra quét │  │ Mời người     │
-│ nhận tên,     │  │ bằng điện     │  │ thân, thêm ký │
-│ ngày, quan hệ;│  │ thoại; nhận   │  │ ức; chỉ nâng  │
-│ yêu cầu sửa   │  │ hướng dẫn và  │  │ cấp khi có    │
-│ trước khi đăng│  │ quyền quản lý │  │ nhu cầu       │
-└───────────────┘  └───────────────┘  └───────────────┘
+Tạo bản nháp → Xem trước → Chọn Basic hoặc gói cao hơn
+      → Tùy chọn bảng QR và dịch vụ → Thanh toán
+      → Kích hoạt hồ sơ → Sản xuất và giao bảng nếu có
 ```
+
+| Bước | Việc | Ghi chú |
+|---|---|---|
+| 1 | Tạo bản nháp | F4 lối tạo nhanh |
+| 2 | Xem trước | Theo mẫu, ẩn mục trống |
+| 3 | Chọn gói | Basic dưới 100.000đ/hồ sơ, hoặc gói dung lượng cao hơn |
+| 4 | Tùy chọn | Bảng mica, kim loại, gốm; hoặc dịch vụ video. Bỏ qua được |
+| 5 | Thanh toán | Một lần. Trạng thái chờ / lỗi / thành công. Không tạo đơn trùng |
+| 6 | Kích hoạt | F7: đã trả tiền, nội dung được duyệt, quyền hiển thị đã chọn |
+| 7 | Giao bảng | Chỉ khi có mua bảng. F14 |
+
+Sau kích hoạt, khách mời người thân và bổ sung ký ức trên cùng hồ sơ. Nâng dung lượng, mua thêm bảng hoặc đặt video không tạo hồ sơ mới.
+
+Khách muốn đội ngũ viết hộ đi theo F12 và F13. Đó là dịch vụ P1, không phải cổng bắt buộc của hành trình này.
 
 ### Ba nguyên tắc trải nghiệm (kiểm tra mọi màn hình theo 3 tiêu chí này)
 | Nguyên tắc | Nghĩa là |
@@ -494,6 +542,8 @@ Theo dõi **điểm bỏ dở**, **thời gian hoàn tất từng bước**, và
 
 <a id="f12"></a>
 ## F12. Từ lead đến đơn hàng
+
+Đơn tự phục vụ (F11) do khách tạo và thanh toán, không đi qua lead. Luồng dưới đây dành cho khách cần tư vấn hoặc thuê biên tập.
 
 ```
 A2 tìm lead   →  A3 chuẩn bị  →  Partner xác  →  Báo giá      →  Khách    →  A7 ghi nhận
@@ -516,7 +566,11 @@ Hệ thống phải chặn: gửi báo giá, gửi email hàng loạt, ký kết
 ---
 
 <a id="f13"></a>
-## F13. Quy trình sản xuất một đơn (7 bước nội bộ) ⭐
+## F13. Quy trình biên tập khi khách thuê dịch vụ ⭐
+
+Chỉ áp dụng khi khách đặt dịch vụ biên tập (C3, P1). Giai đoạn đầu có thể vận hành thủ công. Đơn tự phục vụ không đi qua A4.
+
+Đơn có bảng QR đi theo F14, tách khỏi trạng thái nội dung của hồ sơ.
 
 ```
 1. A6 TIẾP NHẬN
@@ -532,33 +586,35 @@ Hệ thống phải chặn: gửi báo giá, gửi email hàng loạt, ký kết
 3. A8 KIỂM TRA
    ├ Soát dữ kiện & nguồn
    ├ Soát quyền hiển thị
-   └ Soát điều kiện xuất bản
+   └ Soát điều kiện kích hoạt (thanh toán, nội dung, quyền hiển thị)
         ↓
 4. GIA ĐÌNH XÁC NHẬN
    ├ Sửa tên, ngày, quan hệ
    └ DUYỆT BẢN CUỐI              ← cổng bắt buộc
         ↓
-5. FOUNDER DUYỆT · A5 PHÁT HÀNH
-   ├ Xuất bản hồ sơ
-   └ Sinh & liên kết QR ổn định
+5. FOUNDER DUYỆT · A5 KÍCH HOẠT
+   ├ Đủ thanh toán, nội dung đã duyệt, quyền hiển thị đã chọn
+   └ Sinh và liên kết QR ổn định nếu chưa có
         ↓
 6. A6 BÀN GIAO
-   ├ Quét thử QR bằng điện thoại thật
+   ├ Quét thử QR số bằng điện thoại
    ├ Hướng dẫn gia đình sử dụng
    ├ CHUYỂN QUYỀN QUẢN LÝ cho gia đình
-   └ Nghiệm thu
+   └ Ghi nhận bàn giao nội dung
         ↓
 7. A7 ĐỐI SOÁT · A1 TỔNG HỢP
-   ├ Thu chi, hoa hồng đối tác
+   ├ Thu chi
+   ├ Hoa hồng chỉ nếu có thỏa thuận riêng
    └ Ghi lỗi và bài học
 ```
 
-### ✅ Điều kiện "HOÀN TẤT" một đơn (checklist nghiệm thu)
+### Điều kiện hoàn tất một đơn biên tập
 - ☐ Nội dung được gia đình duyệt
-- ☐ QR mở đúng trang (đã quét thử bằng điện thoại thật)
+- ☐ Đã thanh toán phần dịch vụ đã chốt
+- ☐ QR số mở đúng hồ sơ
 - ☐ Quyền truy cập đúng như đã thống nhất
 - ☐ Khách nhận hướng dẫn sử dụng
-- ☐ Lưu biên bản nghiệm thu
+- ☐ Lưu biên bản bàn giao nội dung
 
 ### Yêu cầu hệ thống
 - Mỗi đơn có **một mã đơn xuyên suốt** cả 7 bước
@@ -568,58 +624,68 @@ Hệ thống phải chặn: gửi báo giá, gửi email hàng loạt, ký kết
 ---
 
 <a id="f14"></a>
-## F14. Sản xuất & bàn giao QR vật lý
+## F14. Sản xuất & giao bảng QR vật lý
+
+Chỉ chạy khi khách mua bảng. Hồ sơ Basic không đi vào luồng này. Công ty không khắc đá, không lắp tại mộ và không nghiệm thu tại hiện trường.
 
 ```
-1. Hồ sơ xuất bản → sinh URL ổn định → sinh mã QR
+1. Hồ sơ đã có URL ổn định và mã QR số
         ↓
-2. Chọn sản phẩm: Bảng mica | Bảng kim loại | Khắc trực tiếp lên đá | Bảng bổ sung
+2. Khách chọn bảng: Mica (trong nhà) | Kim loại cao cấp | Gốm (khi đã mở bán)
+   Kim loại: màu vàng, bạc, đồng, trắng sáng
+   Gốm: chờ chốt mẫu; phụ kiện lắp theo thiết kế riêng, không dùng cách khoan của kim loại
         ↓
-3. Thiết kế bảng (logo, tên, câu chữ) → gia đình duyệt mẫu
+3. Khách duyệt mẫu: tên, ngày tháng, bố cục
+   Trạng thái: Chờ duyệt mẫu
         ↓
-4. Đặt sản xuất (nội bộ hoặc đối tác đá mỹ nghệ)
-   Trạng thái: Đặt → Đang sản xuất → Đã xong → Vận chuyển → Lắp đặt
+4. Sản xuất → Kiểm tra QR (quét thử, mở đúng trang) → Đóng gói → Vận chuyển → Đã giao
+   Gốm thêm: kiểm tra quét, đóng gói chống vỡ, cách xử lý nếu vỡ khi giao
         ↓
-5. Lắp đặt tại mộ / bàn giao để gia đình tự đặt trong nhà
-        ↓
-6. ⭐ QUÉT THỬ BẰNG ĐIỆN THOẠI THẬT TẠI HIỆN TRƯỜNG
-   ├ Mở đúng trang?
-   ├ Tốc độ chấp nhận được với 4G tại chỗ?
-   └ Hiển thị đúng nội dung công khai?
-        ↓
-7. Chụp ảnh nghiệm thu → lưu vào hồ sơ đơn → đóng đơn
+5. Giao bảng đã khoan sẵn (nếu loại bảng cần khoan) và phụ kiện phù hợp
+   Khách tự lắp
 ```
+
+Khắc lên đá do đối tác bia mộ làm và thu tiền. Công ty chỉ cấp QR số và thu phí nền tảng (F15).
 
 ### Ngoại lệ
 | Tình huống | Xử lý |
 |---|---|
-| QR mờ, khó quét | Làm lại, chi phí tính vào lỗi sản xuất; ghi vào nhật ký sự cố (A8) |
-| Bảng hỏng/mất sau này | Cấp lại bảng, **giữ nguyên URL cũ** — không sinh mã mới |
-| Gia đình đổi gói | URL không đổi |
+| QR mờ, khó quét, giao sai hoặc hỏng | Làm lại theo chính sách; ghi nhật ký sự cố (A8). Khách báo qua B6.8 |
+| Bảng hỏng hoặc mất sau này | Cấp lại bảng, giữ nguyên URL — không sinh mã mới |
+| Nâng gói hoặc sửa hồ sơ | URL không đổi |
+| Gốm vỡ khi vận chuyển | Xử lý theo cam kết đóng gói chống vỡ, không dùng quy cách kim loại |
 
 ---
 
 <a id="f15"></a>
-## F15. Đối tác giới thiệu & đối soát hoa hồng *(P1)*
+## F15. Đối tác bia mộ và hoa hồng theo thỏa thuận *(P1)*
 
 ```
-1. A3 ký chính sách đối tác: nguồn đơn, trách nhiệm, hoa hồng, cách đối soát
+ĐỐI TÁC BIA MỘ
+1. Gia đình muốn khắc QR lên đá
         ↓
-2. Cấp cho đối tác: mã giới thiệu riêng + bộ công cụ
-   ├ Một hồ sơ mẫu hoàn chỉnh + QR thử thật
-   ├ Bảng gói dịch vụ (phạm vi, thời gian, điều kiện duy trì)
-   └ Mẫu email/Zalo giới thiệu
+2. Công ty thu phí nền tảng và cấp mã QR số
         ↓
-3. Đối tác giới thiệu gia đình → đơn gắn mã nguồn
+3. Đối tác tự báo giá, tự thu tiền khắc đá, tự sản xuất phần đá
         ↓
-4. Đơn hoàn tất → hệ thống tính hoa hồng
+4. Không mặc định khoản hoa hồng thêm từ công ty
+
+ĐỐI TÁC GIỚI THIỆU KHÁC
+1. A3 ký thỏa thuận riêng: nguồn đơn, trách nhiệm, hoa hồng, cách đối soát
         ↓
-5. A7 đối soát định kỳ → thanh toán
+2. Cấp mã giới thiệu + bộ công cụ
+   ├ Một hồ sơ mẫu + QR thử
+   ├ Bảng gói (Basic, nâng dung lượng, bảng QR, dịch vụ video)
+   └ Mẫu lời giới thiệu
         ↓
-6. Đánh giá: đối tác có đơn lặp lại không? (KPI: ≥ 3 đối tác tiếp tục)
+3. Đơn gắn mã nguồn
+        ↓
+4. Chỉ khi có thỏa thuận: A7 đối soát và trả hoa hồng
+        ↓
+5. Đánh giá đối tác có đơn lặp lại (KPI: ≥ 3 đối tác tiếp tục)
 ```
 
-> 🔒 **Ranh giới cứng:** đối tác **không truy cập được dữ liệu gia đình**. Cổng đối tác chỉ hiển thị: đơn do mình giới thiệu, trạng thái, hoa hồng.
+> Đối tác không truy cập dữ liệu gia đình. Cổng đối tác (D3.5, P2) nếu làm sau chỉ hiện đơn do mình giới thiệu và trạng thái. Hoa hồng chỉ hiện khi thỏa thuận có khoản đó.
 
 ---
 ---
@@ -682,17 +748,28 @@ Mọi nội dung có AI tham gia phải hiển thị nhãn: **"Do AI hỗ trợ 
 
 ## PHỤ LỤC A — Sơ đồ trạng thái tổng hợp
 
-### Trạng thái Hồ sơ
+Bốn nhóm trạng thái dưới đây không gộp thành một trạng thái hồ sơ.
+
+### Trạng thái nội dung
 ```
-Nháp ──▶ Chờ gia đình duyệt ──▶ Sẵn sàng xuất bản ──▶ Đã xuất bản
-  ▲              │                                          │
-  └──────────────┘                              ┌───────────┤
-     (yêu cầu sửa)                              ▼           ▼
-                                          Tạm ẩn      Quá hạn (chỉ đọc)
-                                                            │
-                                                            ▼
-                                                    Lưu trữ (ẩn, giữ dữ liệu)
+Nháp ──▶ Chờ duyệt nội dung ──▶ Nội dung đã duyệt ──▶ Đã kích hoạt
+  ▲              │                                      │
+  └──────────────┘                                      ▼
+     (yêu cầu sửa)                                   Tạm ẩn
 ```
+
+Hồ sơ đã thanh toán không có trạng thái quá hạn. Bản nháp chưa thanh toán có hạn lưu riêng; số ngày chưa chốt.
+
+### Trạng thái thanh toán
+```
+Chưa thanh toán ──▶ Chờ xác nhận ──▶ Thành công
+                         │
+                         └──▶ Lỗi ──▶ Chờ xác nhận (thanh toán lại)
+```
+
+### Trạng thái quyền hiển thị
+
+Mỗi khối nội dung một mức: **Riêng tư** (mặc định) · **Gia đình** · **Công khai**. Đổi mức không đổi trạng thái thanh toán hay đơn sản xuất.
 
 ### Trạng thái Đóng góp
 ```
@@ -708,15 +785,17 @@ Chờ duyệt ──▶ Đã duyệt (hiển thị)
     └─────▶ Mâu thuẫn ──▶ (F16) ──▶ Đã xác nhận / Bác bỏ
 ```
 
-### Trạng thái Đơn hàng
+### Trạng thái đơn tư vấn / biên tập
 ```
-Lead ▶ Đang tư vấn ▶ Đã báo giá ▶ Đã chốt ▶ Đang sản xuất
-     ▶ Chờ gia đình duyệt ▶ Đã phát hành ▶ Đã bàn giao ▶ Đã đối soát ▶ Đóng
+Lead ▶ Đang tư vấn ▶ Đã báo giá ▶ Đã chốt ▶ Đang biên tập
+     ▶ Chờ gia đình duyệt ▶ Đã kích hoạt ▶ Đã bàn giao ▶ Đóng
 ```
 
-### Trạng thái QR vật lý
+Đơn khách tự mua (F11) bắt đầu ở **Chưa thanh toán**, không đi qua Lead.
+
+### Trạng thái đơn sản xuất bảng QR
 ```
-Chưa đặt ▶ Đã đặt ▶ Đang sản xuất ▶ Đã xong ▶ Vận chuyển ▶ Đã lắp ▶ Đã nghiệm thu
+Chờ duyệt mẫu ▶ Đang sản xuất ▶ Kiểm tra QR ▶ Đóng gói ▶ Vận chuyển ▶ Đã giao
 ```
 
 ---
@@ -726,17 +805,22 @@ Chưa đặt ▶ Đã đặt ▶ Đang sản xuất ▶ Đã xong ▶ Vận chuy
 | # | Màn hình | Nền tảng | Độ ưu tiên thiết kế |
 |---|---|---|---|
 | 1 | Trang tưởng niệm công khai (5 tab) | Mobile + Desktop | ⭐⭐⭐ Cao nhất |
-| 2 | Wizard chỉnh sửa hồ sơ (7 bước) | Desktop | ⭐⭐⭐ |
-| 3 | Bảng điều khiển gia đình | Mobile + Desktop | ⭐⭐ |
-| 4 | Kho tư liệu | Desktop + Mobile | ⭐⭐ |
-| 5 | Xem trước & duyệt | Desktop | ⭐⭐ |
-| 6 | Form "Gửi một kỷ niệm" | Mobile | ⭐⭐ |
-| 7 | Mời người thân & quản lý quyền | Mobile + Desktop | ⭐ |
-| 8 | Trang giới thiệu + bảng gói | Desktop + Mobile | ⭐⭐ |
-| 9 | Đăng ký/đăng nhập OTP | Mobile | ⭐ |
-| 10 | Quản trị vận hành (đơn, QR) | Desktop | ⭐ |
+| 2 | Tạo nhanh + xem trước theo mẫu | Mobile + Desktop | ⭐⭐⭐ |
+| 3 | Chỉnh sửa nâng cao (7 nhóm, không chặn xem trước) | Desktop | ⭐⭐⭐ |
+| 4 | Chọn gói, nâng gói và thanh toán | Mobile + Desktop | ⭐⭐⭐ |
+| 5 | Tùy chọn bảng QR và duyệt mẫu | Mobile + Desktop | ⭐⭐ |
+| 6 | Địa chỉ nhận hàng | Mobile + Desktop | ⭐⭐ |
+| 7 | Theo dõi đơn | Mobile + Desktop | ⭐⭐ |
+| 8 | Bảng điều khiển gia đình | Mobile + Desktop | ⭐⭐ |
+| 9 | Kho tư liệu | Desktop + Mobile | ⭐⭐ |
+| 10 | Xem trước và duyệt | Desktop | ⭐⭐ |
+| 11 | Form "Gửi một kỷ niệm" | Mobile | ⭐⭐ |
+| 12 | Mời người thân, người quản lý dự phòng | Mobile + Desktop | ⭐ |
+| 13 | Trang giới thiệu + bảng gói | Desktop + Mobile | ⭐⭐ |
+| 14 | Đăng ký/đăng nhập OTP | Mobile | ⭐ |
+| 15 | Quản trị vận hành (đơn, sản xuất bảng) | Desktop | ⭐ |
 
-*(Đã có mockup sẵn cho: #1 desktop, #1 mobile, #2 desktop — trong các file ảnh 01, 20, 21.)*
+*(Đã có mockup cho trang tưởng niệm (#1, ảnh 01 và 20) và màn chỉnh sửa nâng cao (#3, ảnh 21). Chưa có mockup tạo nhanh, chọn gói và thanh toán.)*
 
 ---
 

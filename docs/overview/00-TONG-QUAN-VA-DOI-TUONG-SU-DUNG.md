@@ -1,9 +1,9 @@
 # KÝ ỨC VIỆT — TÀI LIỆU THIẾT KẾ CHỨC NĂNG
 ## Phần 0: Tổng quan sản phẩm & Đối tượng sử dụng
 
-> Phiên bản: 0.1 (bản cơ sở để thống nhất) — Ngày: 30/09/2026
-> Nguồn: tổng hợp từ 15 tài liệu/infographic chiến lược trong thư mục dự án.
-> Trạng thái: **ĐỀ XUẤT — cần chốt trước khi sang thiết kế chi tiết.**
+> Phiên bản: 0.2 — Ngày: 05/10/2026
+> Nguồn: bản cơ sở 30/09/2026, đã nhập ý kiến cộng tác viên trong `docs/suggestions/`.
+> Trạng thái: **ĐÃ CẬP NHẬT THEO GÓP Ý — các điểm còn mở nằm ở mục 11.**
 
 ---
 
@@ -47,7 +47,7 @@ Mã QR  →  Trang tưởng niệm  →  Gia phả số  →  Bản đồ phần
 
 | # | Mảng | Ưu tiên | Khách hàng | Sản phẩm |
 |---|---|---|---|---|
-| 01 | **Trang tưởng niệm & QR** | Ưu tiên ban đầu | Gia đình; đối tác bia mộ, đá mỹ nghệ | Hồ sơ tưởng niệm, ảnh, tiểu sử, album; QR khắc trên vật liệu bền |
+| 01 | **Trang tưởng niệm & QR** | Ưu tiên ban đầu | Gia đình; đối tác bia mộ, đá mỹ nghệ | Hồ sơ tưởng niệm số (ảnh, tiểu sử, album, QR số). Bảng QR vật lý là tùy chọn, không đi kèm mọi hồ sơ |
 | 02 | **Gia phả & dòng họ** | Mở rộng theo nhu cầu | Gia đình, dòng họ, ban quản lý nhà thờ họ | Cây gia phả, hồ sơ thành viên, quan hệ, nhánh họ |
 | 03 | **Nội dung & kho ký ức** | Ưu tiên ban đầu | Gia đình muốn lưu chuyện đời, ảnh cũ, tư liệu | Tiểu sử, album số, dòng thời gian, ghi âm, video ký ức |
 | 04 | **Nghĩa trang & vị trí mộ** | B2B — thử khi có đối tác | Ban quản lý nghĩa trang; khu mộ dòng họ | Sơ đồ khu–lô–hàng–mộ, tọa độ, tìm kiếm, chỉ dẫn, lịch chăm sóc |
@@ -80,8 +80,8 @@ Mã QR  →  Trang tưởng niệm  →  Gia phả số  →  Bản đồ phần
 
 #### Nhóm 3 — ĐỐI TÁC GIỚI THIỆU *(kênh phân phối, không phải người dùng cuối)*
 - **Ai:** cơ sở bia mộ, đá mỹ nghệ, dịch vụ tang lễ.
-- **Vai trò:** giới thiệu gia đình và phối hợp gắn QR vật lý.
-- **Nhu cầu:** dễ giới thiệu, bàn giao ổn định, đối soát hoa hồng minh bạch.
+- **Vai trò:** giới thiệu gia đình và, với cơ sở bia mộ, tự khắc đá theo báo giá của họ.
+- **Nhu cầu:** dễ giới thiệu, bàn giao QR ổn định. Công ty thu phí nền tảng và cấp QR; đối tác bia mộ tự báo giá, tự thu tiền khắc đá. Hoa hồng chỉ khi có thỏa thuận riêng.
 - **Ràng buộc quan trọng:** **không tự sở hữu dữ liệu gia đình.**
 
 #### Nhóm 4 — BAN QUẢN LÝ NGHĨA TRANG *(B2B, giai đoạn sau)*
@@ -93,8 +93,8 @@ Mã QR  →  Trang tưởng niệm  →  Gia phả số  →  Bản đồ phần
 ### 4.2. Người dùng ẩn danh — QUAN TRỌNG NHẤT VỀ SỐ LƯỢNG
 **Người quét QR tại mộ / người được chia sẻ link.** Không có tài khoản, không đăng nhập. Đây là nhóm tạo hiệu ứng lan truyền (vòng tăng trưởng). Trải nghiệm của họ phải:
 - Mở được ngay trên điện thoại, không cần cài gì, không cần đăng nhập.
-- Chỉ thấy phần gia đình cho phép công khai.
-- Có lối vào rõ ràng để **"Gửi một kỷ niệm"** hoặc **"Đề nghị kết nối"** → chính là đầu vào của hồ sơ mới.
+- Chỉ thấy phần gia đình cho phép công khai. Hồ sơ đã trả phí vẫn có thể giữ riêng tư.
+- Có lối vào **"Gửi một kỷ niệm"** ngay từ MVP. **"Đề nghị kết nối"** để giai đoạn 2.
 
 ### 4.3. Người vận hành nội bộ
 Hiện tại: **2 người điều hành (founder) + 8 vai trò chuyên môn** (A1–A8) chia việc, có AI hỗ trợ theo từng công việc.
@@ -147,7 +147,9 @@ Hiện tại: **2 người điều hành (founder) + 8 vai trò chuyên môn** (
 | 👨‍👩‍👧 **Gia đình** | Thành viên đã được cấp quyền | Album đầy đủ, gia phả, câu chuyện chi tiết, ghi âm, video |
 | 🔒 **Riêng tư** | Chỉ người được chỉ định | Giấy tờ, thông tin liên hệ, dữ liệu quản lý mộ, thông tin quản trị |
 
-**Quy tắc mặc định:** trường nào chưa chọn mức → mặc định **Riêng tư**. Gia đình phải chủ động mở ra.
+**Quy tắc mặc định:** trường nào chưa chọn mức → mặc định **Riêng tư**. Người quản lý chủ động chọn phần được công khai. Hồ sơ đã trả phí có thể giữ riêng tư sau khi kích hoạt.
+
+**Người còn sống:** dữ liệu của người còn sống không mặc định công khai, kể cả khi họ xuất hiện trên cây gia phả hoặc tab người thân.
 
 ---
 
@@ -177,7 +179,7 @@ Hiện tại: **2 người điều hành (founder) + 8 vai trò chuyên môn** (
 
 | Thực thể | Trường bắt buộc | Ghi chú thiết kế |
 |---|---|---|
-| **Hồ sơ người** | Họ tên, năm sinh, năm mất, người quản lý | Cho phép **để trống hoặc đánh dấu "chờ xác nhận"** khi chưa rõ ngày/tháng — không ép nhập đủ |
+| **Hồ sơ người** | Họ tên, năm sinh, năm mất, người quản lý | Cho phép **để trống hoặc đánh dấu "chờ xác nhận"** khi chưa rõ ngày/tháng — không ép nhập đủ. Phân biệt **thành viên gia phả tối giản** (tên, năm, quan hệ — không phát sinh phí) với **hồ sơ tưởng niệm trả phí**. Thêm người vào cây không tự tạo đơn hàng |
 | **Quan hệ** | Loại (cha/mẹ/con/vợ/chồng/anh chị em), 2 đầu, người xác nhận, trạng thái kiểm chứng | Trạng thái: `đề xuất` / `đã xác nhận` / `mâu thuẫn` |
 | **Tư liệu** | File, loại, nguồn, người đóng góp, quyền sử dụng, mức hiển thị | **Luôn giữ bản gốc**, bản chỉnh sửa là phiên bản mới |
 | **Vị trí mộ** | Nghĩa trang, khu–lô–hàng–mộ, mã mộ, tọa độ, trạng thái kiểm tra | Tọa độ phải có cờ "đã kiểm tra thực địa" |
@@ -191,18 +193,23 @@ Phát hiện mâu thuẫn → Gắn nhãn "CHỜ XÁC NHẬN"
 ```
 ❌ **Không tự động gộp hồ sơ chỉ vì trùng tên.**
 
+**Mã hồ sơ và QR:** giữ nguyên khi chỉnh sửa nội dung, nâng gói hoặc chuyển người quản lý. Mã của hồ sơ đã xóa không được gán lại cho người khác.
+
 ---
 
 ## 8. Cam kết vận hành lâu dài (phải có trong sản phẩm)
 
 | Cam kết | Yêu cầu chức năng |
 |---|---|
-| **Thời hạn rõ** | Mỗi hồ sơ hiển thị: thời gian lưu, dung lượng, phí duy trì, cách gia hạn |
+| **Hồ sơ đã mua** | Thanh toán một lần, lưu trữ trọn đời theo phạm vi gói đã công bố. Không hiện ngày hết hạn. Không buộc gia hạn để xem lại ký ức |
+| **Phạm vi gói** | Hiện gói đã mua, số ảnh, dung lượng đã dùng và quyền lợi. **Basic:** dưới 100.000đ/hồ sơ; tối đa 5 ảnh; tiểu sử; trình bày theo mẫu; đường dẫn chia sẻ và QR số |
+| **Bản nháp chưa thanh toán** | Có thời hạn lưu, thời điểm bắt đầu tính, nhắc trước hạn và cách xử lý khi hết hạn. Số ngày cụ thể chưa chốt |
+| **Nâng gói & mua thêm** | Nâng trên hồ sơ hiện có; giữ nội dung, đường dẫn và QR. Mua thêm bảng QR hoặc dịch vụ video không tạo hồ sơ mới |
 | **Sao lưu thực** | Lịch sao lưu + kiểm tra khôi phục định kỳ; giữ bản gốc tư liệu |
-| **Chuyển người quản lý** | Quy trình xác minh khi người phụ trách không còn khả năng quản lý |
-| **Rời dịch vụ** | Xuất toàn bộ dữ liệu (định dạng mở), thông báo và bàn giao nếu ngừng hoạt động |
+| **Người quản lý dự phòng** | Mỗi hồ sơ có người quản lý dự phòng. Tiếp quản phải xác minh; MVP cho phép xử lý thủ công |
+| **Rời dịch vụ** | Xuất toàn bộ dữ liệu (định dạng mở). Tạm ẩn không làm mất dữ liệu hay quyền lưu trữ đã mua. Tiếp nhận yêu cầu xóa ngay từ MVP; xóa tự động làm sau |
 
-> ⚠️ **Không hứa lưu trữ vĩnh viễn khi chưa có nguồn lực bảo đảm.** Ngôn ngữ giao diện phải phản ánh đúng cam kết thực tế.
+> Cam kết "trọn đời" gắn với **phạm vi gói đã công bố** (số ảnh, dung lượng, loại tư liệu), không phải dung lượng không giới hạn. Giao diện không dùng cụm "vĩnh viễn không điều kiện". Nếu ngừng vận hành, vẫn phải xuất và bàn giao dữ liệu.
 
 ---
 
@@ -229,7 +236,7 @@ Mỗi bước trong vòng này phải có **một nút CTA rõ ràng trên giao 
 
 | KPI | Mục tiêu | Chức năng cần đo |
 |---|---|---|
-| Tỷ lệ hoàn tất hồ sơ | ≥ 60% | Theo dõi điểm bỏ dở trong wizard 7 bước |
+| Tỷ lệ hoàn tất hồ sơ | ≥ 60% | Đo lối tạo nhanh và điểm bỏ dở trong chỉnh sửa nâng cao |
 | Người thân được mời / hồ sơ | ≥ 2 | Đếm lời mời gửi + chấp nhận |
 | Hồ sơ có đóng góp từ người thứ hai | ≥ 30% | Đếm đóng góp được duyệt |
 | Đối tác tiếp tục phân phối | ≥ 3 | Dashboard đối tác |
@@ -237,18 +244,31 @@ Mỗi bước trong vòng này phải có **một nút CTA rõ ràng trên giao 
 
 ---
 
-## 11. Những điểm CẦN CHỐT trước khi sang thiết kế chi tiết
+## 11. Quyết định đã chốt và điểm còn mở
+
+### Đã chốt theo góp ý cộng tác viên
+
+| # | Quyết định |
+|---|---|
+| 1 | **Web/PWA trước.** App native là P2, chỉ làm khi có nhu cầu thật. |
+| 2 | MVP là **mảng 01 + 03**: hồ sơ số, kho tư liệu, thanh toán, bảng QR khi khách mua. Cây gia phả đầy đủ (B5) và phần mềm nghĩa trang là giai đoạn sau. Trong hồ sơ vẫn khai được **thành viên gia phả tối giản**, không phát sinh phí. |
+| 3 | **Cả hai lối tạo hồ sơ.** Tự tạo (tạo nhanh, xem trước, thanh toán) là P0. Dịch vụ biên tập ký ức là P1; giai đoạn đầu có thể nhận và làm thủ công. |
+| 4 | **Không có hồ sơ Basic miễn phí.** Basic là gói trả phí dưới 100.000đ/hồ sơ, thanh toán một lần. Một tài khoản quản lý nhiều hồ sơ. |
+| 5 | **Bảng QR do công ty sản xuất và giao** (mica, kim loại; gốm khi đã kiểm tra mẫu). Khách tự lắp. Công ty không khắc trực tiếp lên đá. Đối tác bia mộ tự báo giá và thu tiền khắc đá; công ty thu phí nền tảng và cấp QR. |
+| 6 | **Nhắc giỗ âm lịch là P1**, không nằm trong MVP. |
+| 7 | Phí tính **theo từng hồ sơ người đã khuất**. Bảng QR vật lý và dịch vụ video là mua thêm, không bắt buộc đi kèm mọi hồ sơ. |
+| 8 | Bốn trạng thái tách riêng: **nội dung, thanh toán, quyền hiển thị, đơn sản xuất.** |
+
+### Còn mở
 
 | # | Câu hỏi | Ảnh hưởng |
 |---|---|---|
-| 1 | Xác nhận **Web/PWA trước, chưa làm app native** — đúng không? | Quyết định toàn bộ kiến trúc frontend |
-| 2 | Phạm vi MVP: chỉ **mảng 01 + 03** (hồ sơ + QR + kho ký ức), hay kèm **gia phả cơ bản**? | Chênh lệch ~40% khối lượng |
-| 3 | Gia đình **tự tạo hồ sơ (self-serve)** hay **đội vận hành làm hộ (dịch vụ)** — hay cả hai? | Quyết định có cần wizard công khai hay chỉ cần back-office |
-| 4 | Có làm **tài khoản miễn phí + hồ sơ Basic miễn phí** ngay từ MVP không? | Ảnh hưởng đăng ký, chống lạm dụng, chi phí lưu trữ |
-| 5 | QR vật lý: nền tảng **tự sản xuất** hay **đối tác đá mỹ nghệ làm**? | Quyết định module quản lý sản xuất & bàn giao |
-| 6 | Mảng 04 (nghĩa trang) có nằm trong **cùng một hệ thống** hay là **sản phẩm tách riêng**? | Quyết định kiến trúc đa tenant |
-| 7 | Cần **đa ngôn ngữ (Việt/Anh)** ngay không? (tài liệu có nhắc "bản song ngữ") | Ảnh hưởng cấu trúc nội dung từ đầu |
-| 8 | **Lịch âm & nhắc giỗ** — MVP hay giai đoạn sau? | Cần thư viện lịch âm + hệ thống thông báo |
+| 1 | Mảng 04 (nghĩa trang) nằm trong **cùng một hệ thống** hay là **sản phẩm tách riêng**? | Kiến trúc đa tenant khi làm P2 |
+| 2 | Cần **đa ngôn ngữ (Việt/Anh)** ngay không? | Cấu trúc nội dung |
+| 3 | Bản nháp chưa thanh toán lưu **bao nhiêu ngày**, tính từ lúc nào, và xử lý ra sao khi hết hạn? | Vòng đời bản nháp (D5.5) |
+| 4 | Gói Basic: **dung lượng tối đa mỗi ảnh** và **giới hạn tiểu sử**? Năm ảnh tính cả ảnh chân dung và ảnh bìa nếu là hai tệp khác nhau. | Chống hiểu "5 ảnh" là dung lượng không giới hạn |
+| 5 | Giá và trần dung lượng của **các gói nâng cấp** (ảnh, âm thanh, video)? | Bảng giá sau Basic |
+| 6 | Bảng **gốm**: mẫu, cách chế tác, điều kiện dùng trong nhà/ngoài trời, sau khi kiểm tra sản phẩm thật? | Có mở bán gốm hay chưa |
 
 ---
 

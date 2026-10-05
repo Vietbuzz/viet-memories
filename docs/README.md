@@ -1,13 +1,26 @@
 # Ký Ức Việt — Bộ tài liệu thiết kế chức năng
 
-Bản cơ sở (v0.1) tổng hợp từ 15 tài liệu/infographic chiến lược trong thư mục gốc.
+Bản **v0.2** (05/10/2026): tổng hợp từ 15 tài liệu/infographic chiến lược, đã nhập ý kiến cộng tác viên.
 Mục đích: để hai founder **thống nhất phạm vi** trước khi sang thiết kế UI/UX và kiến trúc kỹ thuật.
+
+## Bản thiết kế
+
+Nằm trong [`overview/`](./overview/). Đây là bản đang dùng.
 
 | Tài liệu | Nội dung |
 |---|---|
-| [00 — Tổng quan & Đối tượng sử dụng](./00-TONG-QUAN-VA-DOI-TUONG-SU-DUNG.md) | Sản phẩm, nền tảng (web/app), 4 mảng kinh doanh, 4 nhóm khách hàng, ma trận vai trò & quyền, 3 mức hiển thị, mô hình dữ liệu, KPI, **8 câu hỏi cần chốt** |
-| [01 — Danh mục chức năng](./01-DANH-MUC-CHUC-NANG.md) | 5 khu vực hệ thống, bảng chức năng có mã & mức ưu tiên (P0/P1/P2), phạm vi MVP đề xuất, yêu cầu phi chức năng |
-| [02 — Flow chức năng chi tiết](./02-FLOW-CHUC-NANG-CHI-TIET.md) | 17 flow (người dùng, kinh doanh, hệ thống), sơ đồ trạng thái, danh sách màn hình cần thiết kế |
+| [00 — Tổng quan & Đối tượng sử dụng](./overview/00-TONG-QUAN-VA-DOI-TUONG-SU-DUNG.md) | Sản phẩm, nền tảng, 4 mảng kinh doanh, đối tượng, quyền, mức hiển thị, mô hình dữ liệu, cam kết lưu trữ, quyết định đã chốt và điểm còn mở |
+| [01 — Danh mục chức năng](./overview/01-DANH-MUC-CHUC-NANG.md) | 5 khu vực, gói Basic và mua thêm, tạo hồ sơ nhanh, thanh toán, bảng QR, mức ưu tiên P0/P1/P2, phạm vi MVP theo từng mã |
+| [02 — Flow chức năng chi tiết](./overview/02-FLOW-CHUC-NANG-CHI-TIET.md) | Hành trình tự mua, tạo nhanh, kích hoạt, giao bảng, đối tác bia mộ; trạng thái nội dung, thanh toán, hiển thị và sản xuất tách riêng |
+
+## Ý kiến cộng tác viên
+
+Nằm trong [`suggestions/`](./suggestions/). Đã nhập vào bản v0.2. Giữ lại để đối chiếu nguồn quyết định.
+
+| Tài liệu | Nội dung |
+|---|---|
+| [00 — Góp ý](./suggestions/00-gop-y.md) | Sửa các mục đã chốt (gói tính theo hồ sơ, thanh toán một lần, vòng đời bản nháp, vật liệu QR, hoa hồng đối tác); bổ sung tạo hồ sơ nhanh, mua gói & giao hàng, dịch vụ biên tập ký ức; làm rõ gia phả, quyền riêng tư, kế thừa; đồng bộ mức ưu tiên P0/P1/P2 và các flow F4, F7, F10–F15 |
+| [01 — Bổ sung](./suggestions/01-bo-sung.md) | Gói Basic dưới 100.000đ/hồ sơ (tối đa 5 ảnh), nâng dung lượng, dịch vụ video tính riêng, bảng QR (mica, kim loại, gốm) là tùy chọn; chức năng nâng gói trên hồ sơ hiện có; hành trình mua: bản nháp → xem trước → chọn gói → tùy chọn bảng/dịch vụ → thanh toán → kích hoạt |
 
 ## Nguồn tài liệu gốc
 
@@ -31,7 +44,6 @@ Mục đích: để hai founder **thống nhất phạm vi** trước khi sang t
 
 ## Bước tiếp theo đề xuất
 
-1. **Bạn đọc & chốt 8 câu hỏi** ở cuối tài liệu 00.
-2. Chốt **phạm vi MVP** (mục B của tài liệu 01).
-3. Sang thiết kế **wireframe/UI** cho 10 màn hình ở Phụ lục B tài liệu 02.
-4. Song song: thiết kế **lược đồ CSDL** và **kiến trúc kỹ thuật**.
+1. Chốt các điểm còn mở ở mục 11 tài liệu 00: số ngày lưu bản nháp, dung lượng mỗi ảnh và giới hạn tiểu sử Basic, giá các gói nâng cấp, mẫu bảng gốm.
+2. Sang thiết kế **wireframe/UI** cho các màn hình ở Phụ lục B tài liệu 02, gồm tạo nhanh, chọn gói, thanh toán và theo dõi đơn.
+3. Song song: thiết kế **lược đồ CSDL** và **kiến trúc kỹ thuật**, với bốn trạng thái tách riêng.
